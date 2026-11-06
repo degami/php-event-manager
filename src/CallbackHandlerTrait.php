@@ -32,7 +32,7 @@ trait CallbackHandlerTrait
     /**
      * @var callable
      */
-    private ?callable $callback = null;
+    private callable $callback;
 
     /**
      * @var array
@@ -101,9 +101,9 @@ trait CallbackHandlerTrait
     }
 
     /**
-     * @return callable|null
+     * @return callable
      */
-    public function getCallback() : ?callable
+    public function getCallback() : callable
     {
         return $this->callback;
     }

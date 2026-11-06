@@ -34,7 +34,6 @@ class CallbackHandler implements CallbackHandlerInterface
     /**
      * @param callable $callback
      * @param array $data
-     * @param array $data
      */
     public function __construct(callable $callback, array $data = [])
     {

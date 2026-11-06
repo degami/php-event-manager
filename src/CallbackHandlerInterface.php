@@ -67,7 +67,7 @@ interface CallbackHandlerInterface
     public function setCallback(callable $callback) : CallbackHandlerInterface;
 
     /**
-     * @return callable|null
+     * @return callable
      */
-    public function getCallback() : ?callable;
+    public function getCallback() : callable;
 }
