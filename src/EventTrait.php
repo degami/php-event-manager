@@ -32,7 +32,7 @@ trait EventTrait
     /**
      * @var string
      */
-    protected string $name;
+    //protected string $name; // it is already defined in the class that uses this trait
 
     /**
      * @var bool
@@ -42,7 +42,7 @@ trait EventTrait
     /**
      * @var array
      */
-    protected array $data = [];
+    //protected array $data = []; // it is already defined in the class that uses this trait
 
     /**
      * @var EventEmitterInterface
