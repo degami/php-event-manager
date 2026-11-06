@@ -15,14 +15,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with php-event-manager.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @author  Grégory PLANCHAT<g.planchat@gmail.com>
+ * @author  Degami<degami@github.com>
  * @licence GNU Lesser General Public Licence (http://www.gnu.org/licenses/lgpl-3.0.txt)
  */
 
 /**
  * @namespace
  */
-namespace Gplanchat\EventManager;
+namespace Degami\EventManager;
 
 /**
  *
@@ -30,29 +30,29 @@ namespace Gplanchat\EventManager;
 trait EventTrait
 {
     /**
-     * @var string
+     * @var string|null
      */
-    protected $name = null;
+    protected ?string $name = null;
 
     /**
      * @var bool
      */
-    protected $isStopped = false;
+    protected bool $isStopped = false;
 
     /**
      * @var array
      */
-    private $data = [];
+    protected array $data = [];
 
     /**
      * @var EventEmitterInterface
      */
-    private $eventEmitter = null;
+    protected ?EventEmitterInterface $eventEmitter = null;
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->name;
     }
@@ -60,7 +60,7 @@ trait EventTrait
     /**
      * @return EventInterface
      */
-    public function stop()
+    public function stop() : EventInterface
     {
         $this->isStopped = true;
 
@@ -70,7 +70,7 @@ trait EventTrait
     /**
      * @return bool
      */
-    public function isStopped()
+    public function isStopped() : bool
     {
         return (bool) $this->isStopped;
     }
@@ -80,7 +80,7 @@ trait EventTrait
      * @param mixed $default
      * @return mixed
      */
-    public function getData($key, $default = null)
+    public function getData(string $key, $default = null) : mixed
     {
         if (!isset($this->data[(string) $key])) {
             return $default;
@@ -94,7 +94,7 @@ trait EventTrait
      * @param mixed $value
      * @return EventInterface
      */
-    public function setData($key, $value)
+    public function setData(string $key, $value) : EventInterface
     {
         $this->data[(string) $key] = $value;
 
@@ -105,7 +105,7 @@ trait EventTrait
      * @param EventEmitterInterface $eventEmitter
      * @return EventInterface
      */
-    public function setEventEmitter(EventEmitterInterface $eventEmitter)
+    public function setEventEmitter(EventEmitterInterface $eventEmitter) : EventInterface
     {
         $this->eventEmitter = $eventEmitter;
 
@@ -113,9 +113,9 @@ trait EventTrait
     }
 
     /**
-     * @return EventEmitterInterface
+     * @return EventEmitterInterface|null
      */
-    public function getEventEmitter()
+    public function getEventEmitter() : ?EventEmitterInterface
     {
         return $this->eventEmitter;
     }

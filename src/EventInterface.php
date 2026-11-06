@@ -15,14 +15,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with php-event-manager.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @author  Grégory PLANCHAT<g.planchat@gmail.com>
+ * @author  Degami<degami@github.com>
  * @licence GNU Lesser General Public Licence (http://www.gnu.org/licenses/lgpl-3.0.txt)
  */
 
 /**
  * @namespace
  */
-namespace Gplanchat\EventManager;
+namespace Degami\EventManager;
 
 /**
  *
@@ -33,42 +33,42 @@ interface EventInterface
      * @abstract
      * @return string
      */
-    public function getName();
+    public function getName() : ?string;
 
     /**
      * @abstract
      * @return EventInterface
      */
-    public function stop();
+    public function stop() : EventInterface;
 
     /**
      * @abstract
      * @return bool
      */
-    public function isStopped();
+    public function isStopped() : bool;
 
     /**
      * @param string $key
      * @param mixed $default
      * @return mixed
      */
-    public function getData($key, $default = null);
+    public function getData(string $key, $default = null) : mixed;
 
     /**
      * @param string $key
      * @param mixed $value
      * @return EventInterface
      */
-    public function setData($key, $value);
+    public function setData(string $key, $value) : EventInterface;
 
     /**
      * @param EventEmitterInterface $eventEmitter
      * @return EventInterface
      */
-    public function setEventEmitter(EventEmitterInterface $eventEmitter);
+    public function setEventEmitter(EventEmitterInterface $eventEmitter) : EventInterface;
 
     /**
-     * @return EventEmitterInterface
+     * @return EventEmitterInterface|null
      */
-    public function getEventEmitter();
+    public function getEventEmitter() : ?EventEmitterInterface;
 }

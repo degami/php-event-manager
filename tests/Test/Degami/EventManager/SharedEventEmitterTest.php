@@ -7,11 +7,11 @@
  * To change this template use File | Settings | File Templates.
  */
 
-namespace Test\Gplanchat\EventManager;
+namespace Test\Degami\EventManager;
 
 use PHPUnit_Framework_TestCase;
-use Gplanchat\EventManager\Event;
-use Gplanchat\EventManager\SharedEventEmitter;
+use Degami\EventManager\Event;
+use Degami\EventManager\SharedEventEmitter;
 use stdClass;
 
 class SharedEventEmitterTest
@@ -19,7 +19,7 @@ class SharedEventEmitterTest
 {
     protected function _getEventMock(array $methods = [], array $arguments = [])
     {
-        return $this->getMock('Gplanchat\\EventManager\\Event', $methods, $arguments);
+        return $this->getMock('Degami\\EventManager\\Event', $methods, $arguments);
     }
 
     protected function _getEventEmitter()
@@ -69,7 +69,7 @@ class SharedEventEmitterTest
         $eventEmitter = $this->_getEventEmitter();
         $callbackHandler = $eventEmitter->on('my_event_name', function(Event $e) use(&$counter) {$counter++;});
 
-        $this->assertInstanceOf('Gplanchat\\EventManager\\CallbackHandler', $callbackHandler);
+        $this->assertInstanceOf('Degami\\EventManager\\CallbackHandler', $callbackHandler);
 
         $eventEmitter->removeListener('my_event_name', $callbackHandler);
 

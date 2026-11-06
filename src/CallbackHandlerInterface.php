@@ -15,14 +15,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with php-event-manager.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @author  Grégory PLANCHAT<g.planchat@gmail.com>
+ * @author  Degami<degami@github.com>
  * @licence GNU Lesser General Public Licence (http://www.gnu.org/licenses/lgpl-3.0.txt)
  */
 
 /**
  * @namespace
  */
-namespace Gplanchat\EventManager;
+namespace Degami\EventManager;
 
 /**
  *
@@ -31,42 +31,43 @@ interface CallbackHandlerInterface
 {
     /**
      * @param array $datas
-     * @return $this
+     * @return CallbackHandlerInterface
      */
-    public function initData(array $datas);
+    public function initData(array $datas) : CallbackHandlerInterface;
 
     /**
      * @param string $key
      * @param mixed $value
-     * @return null
+     * @return CallbackHandlerInterface
      */
-    public function setData($key, $value = null);
+    public function setData(string $key, $value = null) : CallbackHandlerInterface;
+
     /**
      * @param string $key
      * @param mixed $default
      * @return mixed
      */
-    public function getData($key, $default = null);
+    public function getData(string $key, $default = null) : mixed;
 
     /**
      * @param array $parameters
      * @return void
      */
-    public function call(array $parameters = []);
+    public function call(array $parameters = []) : void;
 
     /**
      * @return void
      */
-    public function __invoke();
+    public function __invoke() : void;
 
     /**
      * @param callable $callback
-     * @return $this
+     * @return CallbackHandlerInterface
      */
-    public function setCallback(callable $callback);
+    public function setCallback(callable $callback) : CallbackHandlerInterface;
 
     /**
-     * @return callable
+     * @return callable|null
      */
-    public function getCallback();
+    public function getCallback() : ?callable;
 }

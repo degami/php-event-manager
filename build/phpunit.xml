@@ -12,14 +12,14 @@
         >
 
     <testsuites>
-        <testsuite name="Grégory PLANCHAT's Event Manager - Unit tests">
-            <directory>../tests/Test/Gplanchat/EventManager</directory>
+        <testsuite name="Degami Event Manager - Unit tests">
+            <directory>../tests/Test/Degami/EventManager</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory suffix=".php">../src/Gplanchat/EventManager</directory>
+            <directory suffix=".php">../src</directory>
         </whitelist>
     </filter>
 

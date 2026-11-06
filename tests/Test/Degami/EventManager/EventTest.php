@@ -7,10 +7,10 @@
  * To change this template use File | Settings | File Templates.
  */
 
-namespace Test\Gplanchat\EventManager;
+namespace Test\Degami\EventManager;
 
 use PHPUnit_Framework_TestCase;
-use Gplanchat\EventManager\Event;
+use Degami\EventManager\Event;
 use stdClass;
 
 class EventTest

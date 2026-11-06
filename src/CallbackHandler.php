@@ -15,20 +15,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with php-event-manager.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @author  Grégory PLANCHAT<g.planchat@gmail.com>
+ * @author  Degami<degami@github.com>
  * @licence GNU Lesser General Public Licence (http://www.gnu.org/licenses/lgpl-3.0.txt)
  */
 
 /**
  * @namespace
  */
-namespace Gplanchat\EventManager;
+namespace Degami\EventManager;
 
 /**
  *
  */
-class CallbackHandler
-    implements CallbackHandlerInterface
+class CallbackHandler implements CallbackHandlerInterface
 {
     use CallbackHandlerTrait;
 
@@ -46,8 +45,12 @@ class CallbackHandler
     /**
      * @param array $parameters
      */
-    public function call(array $parameters = [])
+    public function call(array $parameters = []) : void
     {
+        if (!is_callable($this->getCallback())) {
+            throw new \Exception("Callback is not callable");
+        }
+
         call_user_func_array($this->getCallback(), $parameters);
     }
 }

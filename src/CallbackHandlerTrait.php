@@ -15,14 +15,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with php-event-manager.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @author  Grégory PLANCHAT<g.planchat@gmail.com>
+ * @author  Degami<degami@github.com>
  * @licence GNU Lesser General Public Licence (http://www.gnu.org/licenses/lgpl-3.0.txt)
  */
 
 /**
  * @namespace
  */
-namespace Gplanchat\EventManager;
+namespace Degami\EventManager;
 
 /**
  *
@@ -32,18 +32,18 @@ trait CallbackHandlerTrait
     /**
      * @var callable
      */
-    private $callback = null;
+    private ?callable $callback = null;
 
     /**
      * @var array
      */
-    private $data = [];
+    private array $data = [];
 
     /**
      * @param array $datas
-     * @return $this
+     * @return CallbackHandlerInterface
      */
-    public function initData(array $datas)
+    public function initData(array $datas) : CallbackHandlerInterface
     {
         $this->data = $datas;
 
@@ -53,9 +53,9 @@ trait CallbackHandlerTrait
     /**
      * @param string $key
      * @param mixed $value
-     * @return $this
+     * @return CallbackHandlerInterface
      */
-    public function setData($key, $value = null)
+    public function setData(string $key, $value = null) : CallbackHandlerInterface
     {
         $this->data[(string) $key] = $value;
 
@@ -63,11 +63,11 @@ trait CallbackHandlerTrait
     }
 
     /**
-     * @param $key
-     * @param null $default
+     * @param string $key
+     * @param mixed $default
      * @return mixed
      */
-    public function getData($key, $default = null)
+    public function getData(string $key, $default = null) : mixed
     {
         if (!isset($this->data[(string) $key])) {
             return $default;
@@ -79,21 +79,21 @@ trait CallbackHandlerTrait
      * @param array $parameters
      * @return void
      */
-    abstract public function call(array $parameters = []);
+    abstract public function call(array $parameters = []) : void;
 
     /**
      * @return void
      */
-    public function __invoke()
+    public function __invoke() : void
     {
         $this->call(func_get_args());
     }
 
     /**
      * @param callable $callback
-     * @return $this
+     * @return CallbackHandlerInterface
      */
-    public function setCallback(callable $callback)
+    public function setCallback(callable $callback) : CallbackHandlerInterface
     {
         $this->callback = $callback;
 
@@ -101,9 +101,9 @@ trait CallbackHandlerTrait
     }
 
     /**
-     * @return callable
+     * @return callable|null
      */
-    public function getCallback()
+    public function getCallback() : ?callable
     {
         return $this->callback;
     }

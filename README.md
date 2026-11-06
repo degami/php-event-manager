@@ -3,6 +3,10 @@ php-event-manager
 
 PHP events management library.
 
+a direct fork from [https://github.com/gplanchat/php-event-manager](https://github.com/gplanchat/php-event-manager) as the project seems to be abandoned on packagist.org
+
+updated to php>=8.5 and renamed namespace
+
 ## Description
 
 The event emitting manager let you implement callback-based event management, for implementing modular code or to make easier class reuse.
@@ -11,7 +15,7 @@ Event-based programming is currently available natively into multiple languages 
 
 ## Requirements
 
-* PHP >= 5.4.0
+* PHP >= 8.5
 
 ## Unit testing
 

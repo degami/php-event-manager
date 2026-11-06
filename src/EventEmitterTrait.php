@@ -15,14 +15,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with php-event-manager.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @author  Grégory PLANCHAT<g.planchat@gmail.com>
+ * @author  Degami<degami@github.com>
  * @licence GNU Lesser General Public Licence (http://www.gnu.org/licenses/lgpl-3.0.txt)
  */
 
 /**
  * @namespace
  */
-namespace Gplanchat\EventManager;
+namespace Degami\EventManager;
 
 use SplPriorityQueue;
 use RuntimeException;
@@ -35,22 +35,22 @@ trait EventEmitterTrait
     /**
      * @var array|CallbackHandlerInterface[]
      */
-    private $eventListeners = [];
+    private array $eventListeners = [];
 
     /**
      * @var array|SplPriorityQueue[]
      */
-    private $priorityQueues = [];
+    private array $priorityQueues = [];
 
     /**
      * @param string|array $eventNameList
      * @param callable $listener
-     * @param int $priority
+     * @param int|null $priority
      * @param bool $isCalledOnce
      * @throws RuntimeException
-     * @return $this
+     * @return CallbackHandlerInterface
      */
-    protected function registerEvent($eventNameList, callable $listener, $priority, $isCalledOnce = false)
+    protected function registerEvent(string|array $eventNameList, callable $listener, ?int $priority, bool $isCalledOnce = false) : CallbackHandlerInterface
     {
         if (is_string($eventNameList)) {
             $eventNameList = [$eventNameList];
@@ -58,6 +58,10 @@ trait EventEmitterTrait
 
         if (!is_array($eventNameList)) {
             throw new RuntimeException('First parameter shoud be either a string or an array');
+        }
+
+        if ($priority === null) {
+            $priority = EventEmitterInterface::DEFAULT_PRIORITY;
         }
 
         $eventEntry = $this->newCallbackHandler($listener, [
@@ -81,23 +85,23 @@ trait EventEmitterTrait
     }
 
     /**
-     * @param $eventNameList
+     * @param string|array $eventNameList
      * @param callable $listener
-     * @param null $priority
-     * @return $this
+     * @param int|null $priority
+     * @return CallbackHandlerInterface
      */
-    public function on($eventNameList, callable $listener, $priority = null)
+    public function on(string|array $eventNameList, callable $listener, ?int $priority = null) : CallbackHandlerInterface
     {
         return $this->registerEvent($eventNameList, $listener, $priority, false);
     }
 
     /**
-     * @param $eventNameList
+     * @param string|array $eventNameList
      * @param callable $listener
-     * @param null $priority
-     * @return $this
+     * @param int|null $priority
+     * @return CallbackHandlerInterface
      */
-    public function once($eventNameList, callable $listener, $priority = null)
+    public function once(string|array $eventNameList, callable $listener, ?int $priority = null) : CallbackHandlerInterface
     {
         return $this->registerEvent($eventNameList, $listener, $priority, true);
     }
@@ -111,7 +115,7 @@ trait EventEmitterTrait
      * @return EventEmitterInterface
      * @throws RuntimeException
      */
-    public function removeListener($eventNameList, CallbackHandlerInterface $callbackHandler)
+    public function removeListener($eventNameList, CallbackHandlerInterface $callbackHandler) : EventEmitterInterface
     {
         if (is_string($eventNameList)) {
             if ($eventNameList == '*') {
@@ -150,7 +154,7 @@ trait EventEmitterTrait
      * @return EventEmitterInterface
      * @throws \RuntimeException
      */
-    public function removeAllListeners($eventNameList)
+    public function removeAllListeners($eventNameList) : EventEmitterInterface
     {
         if (is_string($eventNameList)) {
             if ($eventNameList == '*') {
@@ -186,7 +190,7 @@ trait EventEmitterTrait
      * @return array
      * @throws \RuntimeException
      */
-    public function getListeners($eventNameList)
+    public function getListeners($eventNameList) : array
     {
         if (is_string($eventNameList)) {
             if ($eventNameList == '*') {
@@ -222,11 +226,11 @@ trait EventEmitterTrait
     /**
      * @param EventInterface $event
      * @param array $params
-     * @param callable $cleanupCallback
+     * @param callable|null $cleanupCallback
      * @return EventEmitterInterface
      * @throws \RuntimeException
      */
-    public function emit(EventInterface $event, array $params = [], callable $cleanupCallback = null)
+    public function emit(EventInterface $event, array $params = [], ?callable $cleanupCallback = null) : EventEmitterInterface
     {
         $eventName = $event->getName();
         if (!is_string($eventName) || empty($eventName)) {
@@ -265,7 +269,7 @@ trait EventEmitterTrait
      * @param array $options
      * @return CallbackHandlerInterface
      */
-    public function newCallbackHandler(callable $callback, array $options = [])
+    public function newCallbackHandler(callable $callback, array $options = []) : CallbackHandlerInterface
     {
         return new CallbackHandler($callback, $options);
     }
