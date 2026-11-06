@@ -32,7 +32,7 @@ trait CallbackHandlerTrait
     /**
      * @var callable
      */
-    private callable $callback;
+    private $callback;
 
     /**
      * @var array
@@ -95,6 +95,9 @@ trait CallbackHandlerTrait
      */
     public function setCallback(callable $callback) : CallbackHandlerInterface
     {
+        if (!is_callable($callback)) {
+            throw new \Exception("Callback is not callable");
+        }
         $this->callback = $callback;
 
         return $this;
