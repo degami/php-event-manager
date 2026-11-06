@@ -40,7 +40,7 @@ class Event implements EventInterface
      * @param string $name
      * @param array $data
      */
-    public function __construct(protected ?string $name, protected array $data = [])
+    public function __construct(protected string $name, protected array $data = [])
     {
         if (!is_string($name) || empty($name)) {
             throw new RuntimeException('First parameter should be a string.');

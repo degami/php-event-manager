@@ -30,9 +30,9 @@ namespace Degami\EventManager;
 trait EventTrait
 {
     /**
-     * @var string|null
+     * @var string
      */
-    protected ?string $name = null;
+    protected string $name;
 
     /**
      * @var bool
@@ -52,7 +52,7 @@ trait EventTrait
     /**
      * @return string
      */
-    public function getName() : ?string
+    public function getName() : string
     {
         return $this->name;
     }

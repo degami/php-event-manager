@@ -33,7 +33,7 @@ interface EventInterface
      * @abstract
      * @return string
      */
-    public function getName() : ?string;
+    public function getName() : string;
 
     /**
      * @abstract
